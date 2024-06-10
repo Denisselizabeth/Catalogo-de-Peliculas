@@ -7,14 +7,14 @@ class Peliculas:
         self.lanzamiento = lanzamiento
     def __str__(self):
         return f"Pelicula:{self.titulo}, Genero:{self.genero}, Duracion:{self._duracion}, Lanzamiento:{self.lanzamiento}"
-class CatalogoPelicula():
+class CatalogoPeliculas:
     def __init__(self, nombre, ruta_archivo):
         self.nombre = nombre
         self.ruta_archivo = ruta_archivo
         self.peliculas = []
-    def agregar_pelicula(self, pelicula):
+    def agregar_pelicula(self, nombre, pelicula):
         self.peliculas.append(pelicula)
-        self.guardar_pelicula()
+        self.guardar_pelicula(nombre)
         return True
     def guardar_pelicula(self):
         with open(self.ruta_archivo, "w") as archivo:
@@ -35,34 +35,33 @@ class CatalogoPelicula():
                 print(pelicula)
                 archivo.close()
                 return True
-pelicula = Peliculas(titulo= input("Ingrese el título de la película:", 
-                     genero= input("Ingrese el géner de la película:",
-                     duracion= input("Ingrese la duración de la película:",
-                     lanzamiento= input("Ingrese el año de lanzamiento de la película:"
-                    )
 
-agregar = pelicula.agregar_pelicula(pelicula)
-guardar = pelicula.guardar_pelicula()
-eliminar = pelicula.eliminar_pelicula()
-listar = pelicula.listar_peliculas()
+nombre_catalogo = input("Ingrese el nombre del genero del catalogo de peliculas: ")
+ruta_archivo = "/Users/denisselizabeth/Dropbox/DENISSE/Denisse/ADA/Proyecto 2"+nombre_catalogo
+catalogo=CatalogoPeliculas(nombre_catalogo,ruta_archivo)
 
-
-opcion = int(input("Ingrese una opción: "))
 while True:
+    print("Menu de Opciones:")
     print("1. Agregar pelicula")
     print("2. Listar peliculas")
     print("2. Eliminar catalogo de peliculas")
     print("3. Salir")
+    opcion = int(input("Ingrese una opción: "))
     if opcion == 1:
-        print ({agregar})
-        agregar = True
-        guardar = True
+        pelicula = Peliculas(
+                    titulo= input("Ingrese el título de la película:"), 
+                    genero= input("Ingrese el género de la película:"),
+                    duracion= input("Ingrese la duración de la película:"),
+                    lanzamiento= input("Ingrese el año de lanzamiento de la película:")
+                    )
+        pelicula.agregar_pelicula(titulo, genero, duracion, lanzamiento)
+        catalogo.guardar_pelicula(pelicula)
     elif opcion == 2:
-        print ({listar})a
-        listar = True
+        print ({listar})
+        catalogo.listar_peliculas()
     elif opcion == 3:
         print ({eliminar})
-        eliminar = True
+        catalogo.eliminar_pelicula()
     elif opcion == 4:
         print ("¡Hasta Pronto!")
         break
