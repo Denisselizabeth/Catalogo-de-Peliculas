@@ -1,5 +1,5 @@
 import os
-
+from datetime import datetime
 class Peliculas:
     def __init__(self, titulo: str, puntuacion: float, lanzamiento: int):
         self.titulo = titulo
@@ -28,10 +28,11 @@ class CatalogoPeliculas:
         self.peliculas = []
         if os.path.exists(self.ruta_archivo):
             os.remove(self.ruta_archivo)
+            print(f"Su catálogo {self.nombre} ha sido eliminado. \nSi desea crearlo nuevamente con nuevas películas, escoja la opción 1 en el menú.")
 
     def listar_peliculas(self):
         if not os.path.exists(self.ruta_archivo):
-            print("No hay películas en el catálogo.")
+            print("No hay películas en el catálogo. \nSi desea crearlo, escoja la opción 1 en el menú.")
             return
         with open(self.ruta_archivo, "r") as archivo:
             self.peliculas = []
@@ -41,22 +42,33 @@ class CatalogoPeliculas:
                 self.peliculas.append(pelicula)
                 print(pelicula)
 
-nombre_catalogo = input("Ingrese el nombre del genero del catalogo de peliculas: ")
+nombre_catalogo = input("!BIENVENIDOS AL CATALOGO DE PELICULAS! \nIngrese el nombre del género del catalogo de películas: ")
 ruta_archivo = "/Users/denisselizabeth/Dropbox/DENISSE/Denisse/ADA/Proyecto 2/" + nombre_catalogo + ".txt"
 catalogo = CatalogoPeliculas(nombre_catalogo, ruta_archivo)
 
 while True:
-    print("Menu de Opciones:")
-    print("1. Agregar pelicula")
-    print("2. Listar peliculas")
-    print("3. Eliminar catalogo de peliculas")
-    print("4. Salir")
-    opcion = int(input("Ingrese una opción: "))
+    print("\nMenu de Opciones:")
+    print("1. Agregar película")
+    print("2. Listar películas")
+    print("3. Eliminar catalogo de películas")
+    print("4. Salir\n")
+    opcion = int(input("Ingrese una opción:"))
 
     if opcion == 1:
-        titulo = input("Ingrese el título de la película: ")
-        puntuacion = float(input("Puntúe la película de 1 a 5 estrellas. Solo ingrese números: "))
-        lanzamiento = int(input("Ingrese el año de lanzamiento de la película. Solo ingrese números: "))
+        titulo = input("\nIngrese el título de la película: ")
+        while True:
+            puntuacion = float(input("Puntúe la película de 1 a 5 estrellas. Solo ingrese números: "))
+            if puntuacion > 5:
+                print("La puntuación no tiene que ser mayor a 5. Por favor, inténtelo de nuevo.")
+            else:
+                break          
+        while True:
+            lanzamiento = int(input("Ingrese el año de lanzamiento de la película. Solo ingrese números: "))
+            año_actual = datetime.now().year
+            if lanzamiento > año_actual:
+                print(f"El año de lanzamiento no puede ser mayor que el año actual ({año_actual}). Por favor, inténtelo de nuevo.")
+            else:
+                break        
         pelicula = Peliculas(titulo, puntuacion, lanzamiento)
         catalogo.agregar_pelicula(pelicula)
     elif opcion == 2:
