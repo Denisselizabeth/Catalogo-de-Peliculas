@@ -6,8 +6,7 @@ class Peliculas:
         self._duracion = duracion
         self.lanzamiento = lanzamiento
     def __str__(self):
-        return f"Pelicula:{self.titulo}, Genero:{self.genero}, 
-        Duracion:{self._duracion}, Lanzamiento:{self.lanzamiento}"
+        return f"Pelicula:{self.titulo}, Genero:{self.genero}, Duracion:{self._duracion}, Lanzamiento:{self.lanzamiento}"
 class CatalogoPelicula():
     def __init__(self, nombre, ruta_archivo):
         self.nombre = nombre
@@ -36,19 +35,34 @@ class CatalogoPelicula():
                 print(pelicula)
                 archivo.close()
                 return True
+pelicula = Peliculas(titulo= input("Ingrese el título de la película:", 
+                     genero= input("Ingrese el géner de la película:",
+                     duracion= input("Ingrese la duración de la película:",
+                     lanzamiento= input("Ingrese el año de lanzamiento de la película:"
+                    )
 
+agregar = pelicula.agregar_pelicula(pelicula)
+guardar = pelicula.guardar_pelicula()
+eliminar = pelicula.eliminar_pelicula()
+listar = pelicula.listar_peliculas()
+
+
+opcion = int(input("Ingrese una opción: "))
 while True:
     print("1. Agregar pelicula")
     print("2. Listar peliculas")
     print("2. Eliminar catalogo de peliculas")
     print("3. Salir")
-    opcion = int(input("Ingrese una opcion: "))
     if opcion == 1:
-        agregar_pelicula()
+        print ({agregar})
+        agregar = True
+        guardar = True
     elif opcion == 2:
-        listar_peliculas()
+        print ({listar})a
+        listar = True
     elif opcion == 3:
-        listar_peliculas()
+        print ({eliminar})
+        eliminar = True
     elif opcion == 4:
         print ("¡Hasta Pronto!")
         break
